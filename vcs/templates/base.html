@@ -1,0 +1,30 @@
+{% load staticfiles cms_tags menu_tags sekizai_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock title %} | Veritas Classical Schools Douglasville</title>
+    
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
+    {% render_block "css" %}
+</head>
+<body>
+{% cms_toolbar %}
+<div class='page'>
+    <header>
+        <h1><img src="{% static 'images/logo.png'%}" width="782" height="137" alt="Veritas Classical Schools Douglasville"></h1>
+        <ul class="nav">
+            {% show_menu 0 100 100 100 %}
+        </ul>
+    </header>
+
+    <section class='main'>
+        {% block content %}
+        {% endblock content %}
+    </section>
+    <footer class="copyright"><h1>© Copyright 2014 VCS Douglasville, LLC</h1></footer>
+</div>
+{% render_block "js" %}
+</body>
+</html>

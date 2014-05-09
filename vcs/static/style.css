@@ -1,0 +1,235 @@
+body {
+    text-align:center; /* older browser centering hack */
+    background-color:#000066;
+    font-family:Georgia;
+}
+
+a {
+    color: #034af3;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+p 
+{
+    margin-bottom:15px;
+}
+header,
+footer,
+nav,
+section {
+    display: block;
+}
+div 
+{
+    margin-bottom:10px;
+}
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    color: #000;
+}
+.title 
+{
+    font-size:2em;
+    text-align:center;
+    margin-bottom:10px;
+}
+h1 {
+    font-size: 1.3em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+h2 
+{
+    font-size:1.2em;
+}
+
+h3 {
+    font-size: 1.05em;
+    margin-bottom:0;
+}
+
+h4 {
+    font-size: 1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table {
+    border: solid 1px #444;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 5px;
+    border: solid 1px #444;
+}
+.course-section {
+padding:15px;
+background-color:#eee;
+border-radius:5px;
+}
+table th {
+    padding: 6px 5px;
+    text-align: left;
+    background-color: #eef;
+    border: solid 1px #444;
+}
+.borderless {border:none}
+.borderless td {border:none}
+.borderless tr {border:none}
+.borderless th {padding:5px; border:none; background:none;}
+.table-title 
+{
+    background:none;
+    color:Blue;
+    font-size:1.2em;
+}
+
+
+/* Specialized */
+.inline {display:inline; font-size: 1em;}
+.distinct {border-bottom:1px solid black;}
+
+header {
+    text-align:center;
+}
+
+
+.main {
+    background-color:white;
+    padding:0 15px 5px 15px;
+    overflow:auto;
+    width:870px;
+}
+
+footer.copyright {
+    text-align:center;
+    background-color:yellow;
+    height:40px;
+    margin:0;
+    width:100%;
+    border-radius:0 0 5px 5px;
+}
+    .course-description {
+        overflow:auto;
+    }
+
+.copyright h1 
+{
+    font-size:1em;
+    margin-top:10px;
+    display:inline-block;
+    font-family:Georgia, sans-serif;
+    font-weight:bold;
+}
+.page {
+    width:900px;
+    margin:0 auto;
+    text-align:left;
+}
+
+.nav {
+    border-radius:5px 5px 0 0;
+    width:100%;
+    background-color:yellow;
+    padding:0;
+    display:block;
+    height:40px;
+    font-size:0;
+    text-align:left;
+    position:relative;
+}
+
+.nav .child {
+    vertical-align: top;
+    display: inline-block;
+}
+.nav .child a {
+    height:28px;
+    padding:0;
+    padding-top:12px;
+    text-align:center;
+    font-weight:bold;
+    font-family: Arial;
+    font-size:14px;
+    display:inline-block;
+    border-left:1px solid black;
+    vertical-align:top;
+    width:120px;
+}
+
+.nav > .child:first-child a{
+    border-left:none;
+    border-top-left-radius:5px;
+}
+
+.nav .child a {    
+    color:black;
+    text-decoration:none;
+}
+
+.nav .child > a:hover {
+    background-color:blue;
+    color:white;
+}
+
+.nav .parent a {width:119px;}
+
+.nav .parent {
+    position:relative;
+    cursor:pointer; 
+    padding-top:0;
+    border:none;
+}
+.nav .parent > a:hover {
+    color:black;
+    background:yellow;
+}
+.nav .parent:hover ul
+{
+    display:block;
+}
+.nav .parent ul
+{
+    position:relative;
+    left:0px;
+    top:0px;
+    padding:0px;
+    margin:0;
+    background-color:yellow;
+    list-style-type:none;
+    display:none;
+    border:1px solid black;
+    border-top:none;
+    vertical-align:bottom;
+    width:119px;
+}
+.nav .parent ul li 
+{
+    display:block;
+    margin:0;
+    padding:0;
+}
+.nav .parent ul li a 
+{
+    text-align:center;
+    margin:0;
+    padding:10px;
+    width:100px;
+    border-radius:0;
+    display:block;
+    border:none;
+}
+
