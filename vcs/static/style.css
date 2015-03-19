@@ -155,6 +155,7 @@ footer.copyright {
 .nav .child {
     vertical-align: top;
     display: inline-block;
+    margin-right: -1px;
 }
 .nav .child a {
     height:28px;
@@ -168,6 +169,8 @@ footer.copyright {
     border-left:1px solid black;
     vertical-align:top;
     width:120px;
+    color:black;
+    text-decoration:none;
 }
 
 .nav > .child:first-child a{
@@ -175,17 +178,14 @@ footer.copyright {
     border-top-left-radius:5px;
 }
 
-.nav .child a {    
-    color:black;
-    text-decoration:none;
-}
-
 .nav .child > a:hover {
     background-color:blue;
     color:white;
 }
 
-.nav .parent a {width:119px;}
+.nav .parent a {
+    width:119px;
+}
 
 .nav .parent {
     position:relative;
@@ -195,7 +195,7 @@ footer.copyright {
 }
 .nav .parent > a:hover {
     color:black;
-    background:yellow;
+    background: none;
 }
 .nav .parent:hover ul
 {

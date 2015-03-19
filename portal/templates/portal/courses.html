@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Enrolled Courses</h2>
+        <ul>
+            {% for enrollment in object_list %}
+                <li>{{ enrollment.course.title}} - {{ enrollment.course.teacher }}</li>
+            {% endfor %}
+        </ul>
+{% endblock %}

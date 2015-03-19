@@ -1,1 +1,8 @@
 env/
+*/migrations/
+*.db
+*.swp
+*.swo
+*.swn
+*.swm
+*.pyc

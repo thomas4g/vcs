@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+{# TODO: only show the edit link to teachers/admins #}
+<a href="{% url 'course-edit' object.slug %}">Edit</a>
+    <h1>{{ object.title }}</h1>
+    <h2>{{ object.teacher }}</h2>
+    <p>{{ object.description }}</p>
+{% endblock %}

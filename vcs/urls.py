@@ -7,11 +7,13 @@ from cms.sitemaps import CMSSitemap
 
 admin.autodiscover()
 
-urlpatterns = i18n_patterns('',
+urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^portal/', include('portal.urls')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': {'cmspages': CMSSitemap}}),
     url(r'^', include('cms.urls')),
 )
+
 
 # This is only needed when using runserver.
 if settings.DEBUG:

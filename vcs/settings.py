@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     'cms',
     'mptt',
     'menus',
-    'south',
     'sekizai',
     'djangocms_style',
     'djangocms_column',
@@ -138,7 +137,8 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'reversion',
-    'vcs'
+    'vcs',
+    'portal'
 )
 
 LANGUAGES = (
