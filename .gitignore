@@ -1,8 +1,10 @@
 env/
 */migrations/
 *.db
-*.swp
-*.swo
-*.swn
-*.swm
+*.sw*
 *.pyc
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
