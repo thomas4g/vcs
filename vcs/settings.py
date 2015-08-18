@@ -176,7 +176,7 @@ CMS_PERMISSION = True
 CMS_PLACEHOLDER_CONF = {}
 
 if 'RDS_DB_NAME' in os.environ:
-    DATABASE = {
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': os.environ['RDS_DB_NAME'],
