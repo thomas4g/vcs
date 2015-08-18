@@ -3,7 +3,36 @@
 {% block content %}
 {# TODO: only show the edit link to teachers/admins #}
 <a href="{% url 'course-edit' object.slug %}">Edit</a>
+
+<header>
     <h1>{{ object.title }}</h1>
     <h2>{{ object.teacher }}</h2>
-    <p>{{ object.description }}</p>
+</header>
+<section class='course-description'>
+{{ object.description }}
+</section>
+<section class='course-announcements'>
+    <h1>Announcements</h1>
+    <ol>
+    {% for announcement in object.announcements.all %}
+        <li>
+            <h1>{{ announcement.title }}</h1>
+            <h2>{{ announcement.author }}</h2>
+            <time>{{ announcement.modified }}</time>
+        </li>
+    {% endfor %}
+    </ol>
+</section>
+<section class='course-assignments'>
+    <h1>Assignments</h1>
+    <ol>
+    {% for assignment in object.assignments.all %}
+        <li>
+            <h1>{{ assignment.title }}</h1>
+            <time>{{ assignment.deadline}}</time>
+        </li>
+    {% endfor %}
+    </ol>
+</section>
+
 {% endblock %}

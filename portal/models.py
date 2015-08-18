@@ -14,12 +14,19 @@ class Person(models.Model):
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
 
+class Parent(Person):
+    pass
+
+class Student(Person):
+    parent = models.ForeignKey(Parent, related_name='children')
+
+
 class Course(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()
-    slug = models.CharField(max_length=50, primary_key=True)
+    slug = models.CharField(max_length=50, unique=True)
     teacher = models.ForeignKey(Person, related_name='taught_courses')
-    students = models.ManyToManyField(Person, through='Enrollment')
+    students = models.ManyToManyField(Student, through='Enrollment')
     YEAR_CHOICES = map(lambda x: (x,x), range(1970, datetime.now().year + 1))
     year = models.IntegerField(max_length=4, choices=YEAR_CHOICES, default=datetime.now().year)
     period = models.IntegerField(default=1, validators=[MinValueValidator(1)])
@@ -27,20 +34,47 @@ class Course(models.Model):
     def __unicode__(self):
         return self.title
 
+
+class Announcement(models.Model):
+    title = models.CharField(max_length=150)
+    body = models.TextField()
+    author = models.ForeignKey(Person, related_name='announcements')
+    course = models.ForeignKey(Course, related_name='announcements', null=True, blank=True)
+    created = models.DateTimeField(editable=False)
+    modified = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created = datetime.today()
+        self.modified = datetime.today()
+        return super(Announcement, self).save(*args, **kwargs)
+    
+    class Meta:
+        ordering = ['modified']
+
 class GradebookEntry(models.Model):
     course = models.ForeignKey(Course)
     title = models.CharField(max_length=150)
     description = models.TextField()
     max_points = models.IntegerField()  
     weight = models.FloatField(default=1, validators=[MinValueValidator(0), MaxValueValidator(1)])
+    class Meta:
+        verbose_name_plural = "Gradebook Entries"
 
 
-# class Assignment(GradebookEntry):
-#     # deadline
+class Assignment(GradebookEntry):
+    deadline = models.DateTimeField()
+    late_deadline = models.DateTimeField()
+    proctored = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if not self.late_deadline:
+            self.late_deadline = self.deadline
+        return super(Assignment, self).save(*args, **kwargs)
 
 class Grade(models.Model):
     entry = models.ForeignKey(GradebookEntry)
-    student = models.ForeignKey(Person, related_name='grades')
+    student = models.ForeignKey(Student, related_name='grades')
     points = models.IntegerField()
     comments = models.TextField()
 
@@ -56,9 +90,20 @@ class Grade(models.Model):
     def __unicode__(self):
         return str(self.get_percentage_grade() * 100) + '%'
 
+class Attachment(models.Model):
+    author = models.ForeignKey(Person, related_name='attachments')
+    course = models.ForeignKey(Course, related_name='attachments', null=True, blank=True)
+    assignment = models.ForeignKey(Assignment, related_name='attachments', null=True, blank=True)
+    file = models.FileField()
+
+    def save(self, *args, **kwargs):
+        if self.assignment and self.assignment.course is not self.course:
+            raise ValidationError("Assignment must match course")
+        return super(Attachment, self).save(*args, **kwargs)
+
 
 class Enrollment(models.Model):
-    person = models.ForeignKey(Person, related_name="enrollments")
+    person = models.ForeignKey(Student, related_name="enrollments")
     course = models.ForeignKey(Course)
     
     def get_grade(self):

@@ -2,9 +2,14 @@
 
 {% block content %}
     <h2>Enrolled Courses</h2>
+    {% if object_list %}
         <ul>
+        {{ object_list }}
             {% for enrollment in object_list %}
                 <li>{{ enrollment.course.title}} - {{ enrollment.course.teacher }}</li>
             {% endfor %}
         </ul>
+    {% else %}
+        No courses.
+    {% endif %}
 {% endblock %}

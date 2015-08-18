@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+{# TODO: only show the edit link to teachers/admins #}
+
+<h1>{{ object.title }}</h1>
+by <h2>{{ object.author }}</h2>
+last modified on <time>{{ object.modified }}</time>
+
+<div>
+{{ object.body }}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Announcements</h1>
+<ol>
+{% for announcement in announcements %}
+    <li>
+        <h1>{{ announcement.title }}</h1>
+        <h2>{{ announcement.author }}</h2>
+        <time>{{ announcement.modified }}</time>
+    </li>
+{% endfor %}
+</ol>
+{% endblock %}
