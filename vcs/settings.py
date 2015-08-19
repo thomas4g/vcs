@@ -112,8 +112,8 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'djangocms_admin_style',
-    'djangocms_text_ckeditor',
+#    'djangocms_admin_style',
+#    'djangocms_text_ckeditor',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -121,24 +121,24 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
-    'django.contrib.messages',
-    'cms',
-    'mptt',
-    'menus',
-    'sekizai',
-    'djangocms_style',
-    'djangocms_column',
-    'djangocms_file',
-    'djangocms_flash',
-    'djangocms_googlemap',
-    'djangocms_inherit',
-    'djangocms_link',
-    'djangocms_picture',
-    'djangocms_teaser',
-    'djangocms_video',
-    'reversion',
-    'vcs',
-    'portal'
+    'django.contrib.messages'
+#    'cms',
+#    'mptt',
+#    'menus',
+#    'sekizai',
+#    'djangocms_style',
+#    'djangocms_column',
+#    'djangocms_file',
+#    'djangocms_flash',
+#    'djangocms_googlemap',
+#    'djangocms_inherit',
+#    'djangocms_link',
+#    'djangocms_picture',
+#    'djangocms_teaser',
+#    'djangocms_video',
+#    'reversion',
+#    'vcs',
+#    'portal'
 )
 
 LANGUAGES = (
