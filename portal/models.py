@@ -6,27 +6,22 @@ from utils import get_letter_grade
 from datetime import datetime
 
 
-class Person(models.Model):
-    user = models.OneToOneField(User, related_name="person")
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-
-    def __unicode__(self):
-        return self.first_name + ' ' + self.last_name
+class Person(User):
+    pass 
 
 class Parent(Person):
     pass
 
 class Student(Person):
-    parent = models.ForeignKey(Parent, related_name='children')
+    parents = models.ManyToManyField(Parent, related_name='children')
 
-
+ 
 class Course(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()
-    slug = models.CharField(max_length=50, unique=True)
+    slug = models.CharField(primary_key=True, max_length=50, unique=True)
     teacher = models.ForeignKey(Person, related_name='taught_courses')
-    students = models.ManyToManyField(Student, through='Enrollment')
+    students = models.ManyToManyField(Student, blank=True)
     YEAR_CHOICES = map(lambda x: (x,x), range(1970, datetime.now().year + 1))
     year = models.IntegerField(max_length=4, choices=YEAR_CHOICES, default=datetime.now().year)
     period = models.IntegerField(default=1, validators=[MinValueValidator(1)])
@@ -100,21 +95,5 @@ class Attachment(models.Model):
         if self.assignment and self.assignment.course is not self.course:
             raise ValidationError("Assignment must match course")
         return super(Attachment, self).save(*args, **kwargs)
-
-
-class Enrollment(models.Model):
-    person = models.ForeignKey(Student, related_name="enrollments")
-    course = models.ForeignKey(Course)
-    
-    def get_grade(self):
-        max_points = 0
-        points = 0
-        print ""
-        for grade in self.person.grades.filter(entry__course=self.course):
-            points += grade.points * grade.entry.weight
-            max_points += grade.entry.max_points * grade.entry.weight
-        return points / max_points
-    def get_letter_grade(self):
-        return get_letter_grade(self.get_grade()) 
-    
+   
 

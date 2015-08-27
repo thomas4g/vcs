@@ -12,12 +12,14 @@ class UserAdmin(UserAdmin):
     inlines = (PersonInline, )
 
 admin.site.register(Course)
-admin.site.register(Enrollment)
+#admin.site.register(Enrollment)
 admin.site.register(Announcement)
 admin.site.register(Attachment)
 admin.site.register(GradebookEntry)
 admin.site.register(Assignment)
 admin.site.register(Grade)
+admin.site.register(Parent)
+admin.site.register(Student)
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

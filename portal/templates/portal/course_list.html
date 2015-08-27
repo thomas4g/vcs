@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Courses</h2>
+    {% if object_list %}
+        <ul>
+            {% for course in object_list %}
+                <li>
+                <a href="{% url 'course-details' course.slug %}">
+                {{ course.title}}</a>
+                |
+                <a href="{% url 'teacher-details' course.teacher.id %}">
+                {{ course.teacher.first_name }}
+                {{ course.teacher.last_name }}
+                </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        No courses.
+    {% endif %}
+{% endblock %}

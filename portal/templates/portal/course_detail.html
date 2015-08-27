@@ -6,7 +6,7 @@
 
 <header>
     <h1>{{ object.title }}</h1>
-    <h2>{{ object.teacher }}</h2>
+    Teacher: <h2>{{ object.teacher }}</h2>
 </header>
 <section class='course-description'>
 {{ object.description }}
@@ -34,5 +34,19 @@
     {% endfor %}
     </ol>
 </section>
+<section class='course-students'>
+    <h1>Students</h1>
+    <ol>
+    {% for student in object.students.all %}
+        <li>
+            <h1><a href="{% url 'student-details' student.id %}">
+            {{ student.first_name }} {{ student.last_name }}
+            </a>
+            </h1>
+        </li>
+    {% endfor %}
+    </ol>
+</section>
+
 
 {% endblock %}

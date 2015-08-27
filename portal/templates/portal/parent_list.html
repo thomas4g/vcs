@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Parents</h2>
+    {% if object_list %}
+        <ul>
+            {% for parent in object_list %}
+                <li>
+                <a href="{% url 'parent-details' parent.id%}">
+                {{ parent.first_name }}
+                {{ parent.last_name }}
+                </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        No parents.
+    {% endif %}
+{% endblock %}

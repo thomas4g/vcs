@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+{# TODO: only show the edit link to teachers/admins #}
+<a href="{% url 'student-edit' object.id%}">Edit</a>
+
+<header>
+    <h1>{{ object.first_name }} {{ object.last_name }}</h1>
+    <h2>{{ object.email}}</h2>
+</header>
+
+<section class='student-parents'>
+    <h1>Parents</h1>
+    <ul>
+    {% for parent in object.parents.all %}
+        <li>
+            <h1><a href="{% url 'parent-details' parent.id %}">
+            {{ parent.first_name }} {{ parent.last_name }}
+            </a>
+            </h1>
+        </li>
+    {% endfor %}
+    </ul>
+</section>
+
+<section class='student-courses'>
+    <h1>Courses</h1>
+    <ul>
+    {% for course in object.courses.all %}
+        <li>
+            <h1><a href="{% url 'course-details' course.slug %}">
+            {{ course.title }}
+            </a>
+            </h1>
+        </li>
+    {% endfor %}
+    </ul>
+</section>
+
+
+
+{% endblock %}
