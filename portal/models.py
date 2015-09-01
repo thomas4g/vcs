@@ -9,11 +9,9 @@ from datetime import datetime
 class Person(User):
     pass 
 
-class Parent(Person):
-    pass
 
 class Student(Person):
-    parents = models.ManyToManyField(Parent, related_name='children')
+    parents = models.ManyToManyField(Person, related_name='children')
 
  
 class Course(models.Model):

@@ -16,12 +16,6 @@ urlpatterns = patterns('',
     url(r'persons/new/$', staff_member_required(PersonCreate.as_view()), name="person-create"),
     url(r'persons/(?P<pk>[\w-]+)/edit$', staff_member_required(PersonUpdate.as_view()), name="person-edit"),
 
-    # parent
-    url(r'parents/$', ParentList.as_view(), name="parent-list"),
-    url(r'parents/new/$', staff_member_required(ParentCreate.as_view()), name="parent-create"),
-    url(r'parents/(?P<pk>[\w-]+)/$', ParentDetails.as_view(), name="parent-details"),
-    url(r'parents/(?P<pk>[\w-]+)/edit$', staff_member_required(ParentUpdate.as_view()), name="parent-edit"),
-
     # teacher view
     url(r'teachers/(?P<pk>[\w-]+)/$', TeacherDetails.as_view(), name="teacher-details"),
 

@@ -63,19 +63,6 @@ class TeacherDetails(DetailView):
     template_name = "portal/teacher_detail.html"
 
 
-# Parent
-class ParentDetails(DetailView):
-    model = Parent
-
-class ParentCreate(PersonCreate):
-    model = Parent
-
-class ParentList(ListView):
-    model = Parent
-
-class ParentUpdate(PersonUpdate):
-    model = Parent
-
 # Student
 class StudentDetails(DetailView):
     model = Student
