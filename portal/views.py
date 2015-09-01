@@ -17,8 +17,7 @@ class UpdateView(django_views.UpdateView):
     template_name = edit_form
     def get_success_url(self):
         return reverse_lazy(self.model.__name__.lower() + "-details", args=[self.args[0]])
-
-
+    
 # Course
 class CourseDetails(DetailView):
     model = Course
@@ -28,6 +27,17 @@ class CourseCreate(CreateView):
 
 class CourseList(ListView):
     model = Course
+
+    def get_queryset(self):
+        user = self.request.user 
+        if user.is_staff:
+            return Course.objects.all()
+
+        courses = user.person.taught_courses
+        if type(user.person) is Student:
+            courses += user.person.courses
+        
+        return courses.all()
 
 class CourseUpdate(UpdateView):
     model = Course
@@ -82,3 +92,35 @@ class StudentUpdate(PersonUpdate):
     model = Student
     def __init__(self):
         self.fields = self.fields + ['parents']
+
+# Announcement 
+# TODO: restrict to taught courses upon creation / edit 
+class AnnouncementDetails(DetailView):
+    model = Announcement
+
+class AnnouncementCreate(CreateView):
+    model = Announcement
+    fields = ['title', 'body', 'course']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(AnnouncementCreate, self).form_valid(form)
+
+
+class AnnouncementList(ListView):
+    model = Announcement
+
+    def get_queryset(self):
+        user = self.request.user 
+        if user.is_staff:
+            return Announcement.objects.all()
+
+        announcements = [a for course in user.person.taught_courses for a in course.announcements]
+        if type(user.person) is Student:
+            announcements += [a for course in user.person.courses for a in course.announcements]
+        
+        return announcements.all()
+
+class AnnouncementUpdate(UpdateView):
+    model = Announcement
+    fields = ['title', 'body', 'course']

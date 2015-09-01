@@ -9,7 +9,7 @@
                 <a href="{% url 'course-details' course.slug %}">
                 {{ course.title}}</a>
                 |
-                <a href="{% url 'teacher-details' course.teacher.id %}">
+                <a href="{% url 'person-details' course.teacher.id %}">
                 {{ course.teacher.first_name }}
                 {{ course.teacher.last_name }}
                 </a>
@@ -19,6 +19,8 @@
     {% else %}
         No courses.
     {% endif %}
-
-    <a href="{% url 'course-create' %}">Add Course</a>
+    
+    {% if user.is_staff %}
+        <a href="{% url 'course-create' %}">Add Course</a>
+    {% endif %}
 {% endblock %}

@@ -33,17 +33,10 @@ class Course(models.Model):
 class Announcement(models.Model):
     title = models.CharField(max_length=150)
     body = models.TextField()
-    author = models.ForeignKey(Person, related_name='announcements')
+    author = models.ForeignKey(User, related_name='announcements')
     course = models.ForeignKey(Course, related_name='announcements', null=True, blank=True)
-    created = models.DateTimeField(editable=False)
-    modified = models.DateTimeField()
+    modified = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.created = datetime.today()
-        self.modified = datetime.today()
-        return super(Announcement, self).save(*args, **kwargs)
-    
     class Meta:
         ordering = ['modified']
 
