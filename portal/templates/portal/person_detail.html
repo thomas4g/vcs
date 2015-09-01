@@ -2,14 +2,15 @@
 
 {% block content %}
 {# TODO: only show the edit link to teachers/admins #}
-<a href="{% url 'parent-edit' object.id%}">Edit</a>
+<a href="{% url 'person-edit' object.id%}">Edit</a>
 
 <header>
     <h1>{{ object.first_name }} {{ object.last_name }}</h1>
     <h2>{{ object.email}}</h2>
 </header>
 
-<section class='parent-children'>
+{% if object.children and object.children.all|length > 0 %}
+<section class='person-children'>
     <h1>Children</h1>
     <ul>
     {% for child in object.children.all %}
@@ -23,6 +24,7 @@
     {% endfor %}
     </ul>
 </section>
+{% endif %}
 
 
 {% endblock %}

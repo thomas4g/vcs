@@ -138,7 +138,8 @@ INSTALLED_APPS = (
     'djangocms_video',
     'reversion',
     'vcs',
-    'portal'
+    'portal',
+    'django_render_partial'
 )
 
 LANGUAGES = (

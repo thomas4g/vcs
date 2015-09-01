@@ -1,0 +1,17 @@
+<h2>People</h2>
+{% if object_list %}
+    <ul>
+        {% for person in object_list %}
+            <li>
+            <a href="{% url 'person-details' person.id%}">
+            {{ person.first_name }}
+            {{ person.last_name }}
+            </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    No persons.
+{% endif %}
+
+<a href="{% url 'person-create' %}">Add Person</a>

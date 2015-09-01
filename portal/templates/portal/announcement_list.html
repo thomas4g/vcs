@@ -1,5 +1,3 @@
-{% extends "base.html" %}
-{% block content %}
 <h1>Announcements</h1>
 <ol>
 {% for announcement in object_list  %}
@@ -12,4 +10,5 @@
     </li>
 {% endfor %}
 </ol>
-{% endblock %}
+
+<a href="{% url 'announcement-create' %}">Add announcement</a>

@@ -7,6 +7,11 @@ import django.views.generic.edit as django_views
 from django.forms import ModelForm
 from models import *
 
+
+def portal_home(request):
+    # TODO: user type logic
+    return render(request, "portal/portal_home.html")
+
 edit_form = "portal/edit_form.html"
 class CreateView(django_views.CreateView):
     template_name = edit_form 

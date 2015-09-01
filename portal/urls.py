@@ -4,6 +4,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from portal.views import *
 
 urlpatterns = patterns('',
+    # home
+    url(r'home/$', portal_home, name='portal-home'),
+
     # course
     url(r'courses/$', CourseList.as_view(), name="course-list"),
     url(r'courses/new/$', staff_member_required(CourseCreate.as_view()), name="course-create"),
@@ -12,8 +15,8 @@ urlpatterns = patterns('',
 
     # person
     url(r'persons/$', PersonList.as_view(), name="person-list"),
-    url(r'persons/(?P<pk>[\w-]+)/$', PersonDetails.as_view(), name="person-details"),
     url(r'persons/new/$', staff_member_required(PersonCreate.as_view()), name="person-create"),
+    url(r'persons/(?P<pk>[\w-]+)/$', PersonDetails.as_view(), name="person-details"),
     url(r'persons/(?P<pk>[\w-]+)/edit$', staff_member_required(PersonUpdate.as_view()), name="person-edit"),
 
     # teacher view

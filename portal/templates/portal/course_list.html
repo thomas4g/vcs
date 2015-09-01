@@ -1,26 +1,22 @@
-{% extends "base.html" %}
+<h2>Courses</h2>
+{% if object_list %}
+    <ul>
+        {% for course in object_list %}
+            <li>
+            <a href="{% url 'course-details' course.slug %}">
+            {{ course.title}}</a>
+            |
+            <a href="{% url 'person-details' course.teacher.id %}">
+            {{ course.teacher.first_name }}
+            {{ course.teacher.last_name }}
+            </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    No courses.
+{% endif %}
 
-{% block content %}
-    <h2>Courses</h2>
-    {% if object_list %}
-        <ul>
-            {% for course in object_list %}
-                <li>
-                <a href="{% url 'course-details' course.slug %}">
-                {{ course.title}}</a>
-                |
-                <a href="{% url 'person-details' course.teacher.id %}">
-                {{ course.teacher.first_name }}
-                {{ course.teacher.last_name }}
-                </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        No courses.
-    {% endif %}
-    
-    {% if user.is_staff %}
-        <a href="{% url 'course-create' %}">Add Course</a>
-    {% endif %}
-{% endblock %}
+{% if user.is_staff %}
+    <a href="{% url 'course-create' %}">Add Course</a>
+{% endif %}

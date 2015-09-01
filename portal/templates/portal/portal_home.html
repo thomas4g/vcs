@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Welcome, {{ user }}</p>
+
+{% load render_partial %}
+{% render_partial 'announcement-list' %}
+
+{% load render_partial %}
+{% render_partial 'course-list' %}
+
+{% load render_partial %}
+{% render_partial 'student-list' %}
+
+{% load render_partial %}
+{% render_partial 'person-list' %}
+
+
+
+{% endblock %}
