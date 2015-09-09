@@ -7,6 +7,8 @@
             {{ student.first_name }}
             {{ student.last_name }}
             </a>
+            -
+            <a href="{% url 'student-edit' student.id %}">Edit</a>
             </li>
         {% endfor %}
     </ul>

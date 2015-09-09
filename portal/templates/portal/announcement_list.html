@@ -7,6 +7,7 @@
         {{ announcement.title }}</a></h1>
         <h2>{{ announcement.author }}</h2>
         <time>{{ announcement.modified }}</time>
+        <a href="{% url 'announcement-edit' announcement.id %}">Edit</a>
     </li>
 {% endfor %}
 </ol>

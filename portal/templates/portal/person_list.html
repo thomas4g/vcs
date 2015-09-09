@@ -7,6 +7,8 @@
             {{ person.first_name }}
             {{ person.last_name }}
             </a>
+            -
+            <a href="{% url 'person-edit' person.id%}">Edit</a>
             </li>
         {% endfor %}
     </ul>
