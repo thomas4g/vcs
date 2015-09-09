@@ -14,7 +14,7 @@
     <ul>
     {% for parent in object.parents.all %}
         <li>
-            <h1><a href="{% url 'parent-details' parent.id %}">
+            <h1><a href="{% url 'person-details' parent.id %}">
             {{ parent.first_name }} {{ parent.last_name }}
             </a>
             </h1>
