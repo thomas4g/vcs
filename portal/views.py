@@ -16,12 +16,12 @@ edit_form = "portal/edit_form.html"
 class CreateView(django_views.CreateView):
     template_name = edit_form 
     def get_success_url(self):
-        return reverse_lazy(self.model.__name__.lower() + "-list")
+        return reverse_lazy("portal-home")
 
 class UpdateView(django_views.UpdateView):
     template_name = edit_form
     def get_success_url(self):
-        return reverse_lazy(self.model.__name__.lower() + "-details", args=[self.args[0]])
+        return reverse_lazy("portal-home")
     
 # Course
 class CourseDetails(DetailView):
