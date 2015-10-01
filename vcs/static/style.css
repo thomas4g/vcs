@@ -233,3 +233,25 @@ footer.copyright {
     border:none;
 }
 
+div.blocks {
+    text-align:center;
+}
+
+section.block {
+    text-align:left;
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    margin:15px;
+    padding: 5px;
+    padding-left: 50px;
+    height:100%;
+}
+
+section.block:first-child {
+    border-right: 1px dashed #ccc;
+}
+
+section.block footer {
+    bottom:0px;
+}

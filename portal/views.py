@@ -11,7 +11,10 @@ from models import *
 
 def portal_home(request):
     # TODO: user type logic
-    return render(request, "portal/portal_home.html")
+    if request.user.is_staff and request.GET.get('plain', '') != '1':
+        return render(request, "portal/admin_home.html")
+    else:
+        return render(request, "portal/portal_home.html")
 
 edit_form = "portal/edit_form.html"
 class CreateView(django_views.CreateView):

@@ -28,7 +28,7 @@
     <ol>
     {% for assignment in object.assignments.all %}
         <li>
-            <h1>{{ assignment.title }}</h1>
+            <h1><a href="{% url 'assignment-details' assignment.id %}">{{ assignment.title }}</a></h1>
             <time>{{ assignment.deadline}}</time>
         </li>
     {% endfor %}
