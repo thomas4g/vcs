@@ -1,0 +1,19 @@
+<h2>Assignments</h2>
+{% if object_list %}
+    <ul>
+        {% for assignment in object_list %}
+            <li>
+            <a href="{% url 'assignment-details' assignment.id %}">
+            {{ assignment.title}}</a>
+            -
+            <a href="{% url 'assignment-edit' assignment.id%}">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    No assignments.
+{% endif %}
+
+{% if user.is_staff %}
+    <a href="{% url 'assignment-create' course.slug %}">Add Assignment</a>
+{% endif %}

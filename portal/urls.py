@@ -13,6 +13,13 @@ urlpatterns = patterns('',
     url(r'courses/(?P<pk>[\w-]+)/$', CourseDetails.as_view(), name="course-details"),
     url(r'courses/(?P<pk>[\w-]+)/edit$', CourseUpdate.as_view(), name="course-edit"),
 
+    # assignment
+    url(r'courses/(?P<course>[\w-]+)/assignments/$', AssignmentList.as_view(), name="assignment-list"),
+    url(r'courses/(?P<course>[\w-]+)/assignments/new/$', staff_member_required(AssignmentCreate.as_view()), name="assignment-create"),
+    url(r'assignments/(?P<pk>[\d]+)/$', AssignmentDetails.as_view(), name="assignment-details"),
+    url(r'assignments/(?P<pk>[\w-]+)/edit$', AssignmentUpdate.as_view(), name="assignment-edit"),
+
+
     # person
     url(r'persons/$', PersonList.as_view(), name="person-list"),
     url(r'persons/new/$', staff_member_required(PersonCreate.as_view()), name="person-create"),

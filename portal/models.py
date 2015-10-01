@@ -19,7 +19,7 @@ class Course(models.Model):
     description = models.TextField()
     slug = models.CharField(primary_key=True, max_length=50, unique=True)
     teacher = models.ForeignKey(Person, related_name='taught_courses')
-    students = models.ManyToManyField(Student, blank=True)
+    students = models.ManyToManyField(Student, blank=True, related_name='enrolled_courses')
     YEAR_CHOICES = map(lambda x: (x,x), range(1970, datetime.now().year + 1))
     year = models.IntegerField(max_length=4, choices=YEAR_CHOICES, default=datetime.now().year)
     period = models.IntegerField(default=1, validators=[MinValueValidator(1)])
@@ -39,7 +39,7 @@ class Announcement(models.Model):
         ordering = ['modified']
 
 class GradebookEntry(models.Model):
-    course = models.ForeignKey(Course)
+    course = models.ForeignKey(Course, related_name="graded_items")
     title = models.CharField(max_length=150)
     description = models.TextField()
     max_points = models.IntegerField()  
@@ -49,11 +49,13 @@ class GradebookEntry(models.Model):
 
 
 class Assignment(GradebookEntry):
+    _course = models.ForeignKey(Course, null=True, blank=True, editable=False, related_name='assignments')
     deadline = models.DateTimeField()
     late_deadline = models.DateTimeField()
     proctored = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
+        self._course = self.course
         if not self.late_deadline:
             self.late_deadline = self.deadline
         return super(Assignment, self).save(*args, **kwargs)

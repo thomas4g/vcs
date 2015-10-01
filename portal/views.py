@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView 
 import django.views.generic.edit as django_views
 from django.forms import ModelForm
+from django.forms.widgets import HiddenInput
 from models import *
 
 
@@ -46,6 +47,42 @@ class CourseList(ListView):
 
 class CourseUpdate(UpdateView):
     model = Course
+
+# Assignment
+class AssignmentDetails(DetailView):
+    model = Assignment
+
+class AssignmentCreate(CreateView):
+    model = Assignment
+
+    def get_form(self, request, **kwargs):
+        form = super(AssignmentCreate, self).get_form(request, **kwargs)
+        form.fields['course'].widget = HiddenInput()
+        form.initial = {"course": self.kwargs["course"]}
+        return form
+
+class AssignmentList(ListView):
+    model = Assignment
+
+    def get_queryset(self):
+        user = self.request.user 
+        course = Course.objects.get(slug=self.kwargs["course"])
+        if user.person.taught_courses.filter(slug=course.slug).exists():
+            if type(user.person) is Student:
+                if user.person.enrolled_courses.filter(slug=course.slug).exists():
+                    # TODO FAIL here
+                    pass
+
+        assignments = course.assignments
+        return assignments.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(AssignmentList, self).get_context_data(**kwargs)
+        context['course'] = Course.objects.get(slug=self.kwargs["course"])
+        return context
+
+class AssignmentUpdate(UpdateView):
+    model = Assignment
 
 # Person
 class PersonDetails(DetailView):
