@@ -4,19 +4,21 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from utils import get_letter_grade
 from datetime import datetime
+from ckeditor.fields import RichTextField
+
 
 
 class Person(User):
-    pass 
+    pass
 
 
 class Student(Person):
     parents = models.ManyToManyField(Person, related_name='children')
 
- 
+
 class Course(models.Model):
     title = models.CharField(max_length=150)
-    description = models.TextField()
+    description = RichTextField()
     slug = models.CharField(primary_key=True, max_length=50, unique=True)
     teacher = models.ForeignKey(Person, related_name='taught_courses')
     students = models.ManyToManyField(Student, blank=True, related_name='enrolled_courses')
@@ -30,7 +32,7 @@ class Course(models.Model):
 
 class Announcement(models.Model):
     title = models.CharField(max_length=150)
-    body = models.TextField()
+    body = RichTextField()
     author = models.ForeignKey(User, related_name='announcements')
     course = models.ForeignKey(Course, related_name='announcements', null=True, blank=True)
     modified = models.DateTimeField(auto_now_add=True)
@@ -41,8 +43,8 @@ class Announcement(models.Model):
 class GradebookEntry(models.Model):
     course = models.ForeignKey(Course, related_name="graded_items")
     title = models.CharField(max_length=150)
-    description = models.TextField()
-    max_points = models.IntegerField()  
+    description = RichTextField()
+    max_points = models.IntegerField()
     weight = models.FloatField(default=1, validators=[MinValueValidator(0), MaxValueValidator(1)])
     class Meta:
         verbose_name_plural = "Gradebook Entries"
@@ -73,7 +75,7 @@ class Grade(models.Model):
         return self.points / self.entry.max_points
 
     def get_letter_grade(self):
-        return get_letter_grade(self.get_percentage_grade()) 
+        return get_letter_grade(self.get_percentage_grade())
 
     def __unicode__(self):
         return str(self.get_percentage_grade() * 100) + '%'
@@ -88,5 +90,5 @@ class Attachment(models.Model):
         if self.assignment and self.assignment.course is not self.course:
             raise ValidationError("Assignment must match course")
         return super(Attachment, self).save(*args, **kwargs)
-   
+
 

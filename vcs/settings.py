@@ -67,6 +67,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'vcs', 'static'),
 )
@@ -139,7 +141,8 @@ INSTALLED_APPS = (
     'reversion',
     'vcs',
     'portal',
-    'django_render_partial'
+    'django_render_partial',
+    'ckeditor'
 )
 
 LANGUAGES = (

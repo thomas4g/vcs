@@ -4,10 +4,22 @@ from django.core.urlresolvers import *
 from django.views.generic.base import TemplateView 
 from django.views.generic import ListView, DetailView 
 import django.views.generic.edit as django_views
-from django.forms import ModelForm
+from django.forms import ModelForm, DateInput
 from django.forms.widgets import HiddenInput
 from models import *
 
+
+class DateInput(DateInput):
+    input_type = 'date'
+
+class AssignmentForm(ModelForm):
+    class Meta:
+        model = Assignment
+        fields = '__all__'
+        widgets = {
+            'deadline': DateInput(),
+            'late_deadline': DateInput()
+        }
 
 def portal_home(request):
     # TODO: user type logic
@@ -57,6 +69,7 @@ class AssignmentDetails(DetailView):
 
 class AssignmentCreate(CreateView):
     model = Assignment
+    form_class = AssignmentForm
 
     def get_form(self, request, **kwargs):
         form = super(AssignmentCreate, self).get_form(request, **kwargs)
