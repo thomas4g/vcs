@@ -13,22 +13,37 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 </head>
 <body>
 {% cms_toolbar %}
 <div class='page'>
-    <header>
-        <h1><img src="{% static 'images/medium-logo.png'%}" alt="Veritas Classical Schools Douglasville"></h1>
-        <ul class="nav">
-            {% show_menu 0 100 100 100 %}
-        </ul>
+    <header class='page-header'>
+        <h1>
+            <img src="{% static 'images/smaller-logo.png'%}" alt="Veritas Classical Schools Douglasville">
+            Veritas Classical Schools: Douglasville
+        </h1>
+        <nav>
+            <ul>
+                {% show_menu 0 100 100 100 %}
+            </ul>
+        </nav>
     </header>
 
     <section class='main'>
+        <div class='breadcrumbs'>
+        {% block breadcrumbs %}
+            Home
+        {% endblock %}
+        </div>
         {% block content %}
         {% endblock content %}
     </section>
-    <footer class="copyright"><h1>© Copyright 2014 VCS Douglasville, LLC</h1></footer>
+    <footer class="copyright"><h1>© Copyright {% now "Y" %} VCS Douglasville, LLC</h1></footer>
 </div>
 {% render_block "js" %}
 </body>

@@ -1,26 +1,9 @@
-<section class='block'>
-    <h2>Courses</h2>
-    {% if object_list %}
-        {% for course in object_list %}
-            <article>
-            <a href="{% url 'course-details' course.slug %}">
-            {{ course.title}}</a>
-            |
-            Teacher: <a href="{% url 'person-details' course.teacher.id %}">
-            {{ course.teacher.first_name }}
-            {{ course.teacher.last_name }}
-            </a>
-            |
-            <a href="{% url 'course-edit' course.slug%}">Edit</a>
-            </article>
-        {% endfor %}
-    {% else %}
-        No courses.
-    {% endif %}
-    
-    {% if user.is_staff %}
-        <footer>
-        <a href="{% url 'course-create' %}">Add Course</a>
-        </footer>
-    {% endif %}
-</section>
+<td>
+    <a href="{% url 'course-details' object.slug%}">{{ object.title}}</a>
+</td>
+<td>
+    <a href="{% url 'user-details' object.teacher.id %}">
+    {{ object.teacher.first_name }}
+    {{ object.teacher.last_name }}
+    </a>
+</td>

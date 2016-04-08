@@ -1,0 +1,9 @@
+<td>
+    <a href="{% url 'user-details' object.id%}">
+    {{ object.get_full_name}}
+    </a>
+</td>
+
+<td>
+    {{ object.email }}
+</td>

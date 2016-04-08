@@ -1,24 +1,34 @@
-{% extends "base.html" %}
+{% extends "portal/base.html" %}
+
+{% block breadcrumbs %}
+{% load custom_tags %}
+{{block.super}}{% breadcrumb 'course-list' 'Courses' %}
+{% endblock %}
 
 {% block content %}
 {# TODO: only show the edit link to teachers/admins #}
 <a href="{% url 'course-edit' object.slug %}">Edit</a>
-
+<div class='course'>
 <header>
     <h1>{{ object.title }}</h1>
-    Teacher: <h2>{{ object.teacher }}</h2>
+    <span class='meta'>taught by</span>
+    <h2>{{ object.teacher.get_full_name }}</h2>
 </header>
 <section class='course-description'>
-{{ object.description }}
+{{ object.description | safe}}
 </section>
 <section class='course-announcements'>
     <h1>Announcements</h1>
     <ol>
     {% for announcement in object.announcements.all %}
-        <li>
-            <h1>{{ announcement.title }}</h1>
-            <h2>{{ announcement.author }}</h2>
-            <time>{{ announcement.modified }}</time>
+        <li class='announcement'>
+            <h2>{{ announcement.title }}</h2>
+            <h3>
+                <span class='meta'>by</span>
+                {{ announcement.author.get_full_name }}
+                <span class='meta'>on</span>
+                <time>{{ announcement.modified }}</time>
+            </h3> 
         </li>
     {% endfor %}
     </ol>
@@ -35,19 +45,22 @@
     </ol>
     <a href="{% url 'assignment-create' course.slug %}">Add assignment</a>
 </section>
+
+{% if user.is_staff %}
 <section class='course-students'>
-    <h1>Students</h1>
+    <h1>Roster</h1>
     <ol>
     {% for student in object.students.all %}
         <li>
             <h1><a href="{% url 'student-details' student.id %}">
-            {{ student.first_name }} {{ student.last_name }}
+            {{ student.get_full_name }}
             </a>
             </h1>
         </li>
     {% endfor %}
     </ol>
 </section>
+{% endif %}
 
-
+</div>
 {% endblock %}

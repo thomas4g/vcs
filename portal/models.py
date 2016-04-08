@@ -7,23 +7,20 @@ from datetime import datetime
 from ckeditor.fields import RichTextField
 
 
-
-class Person(User):
-    pass
-
-
-class Student(Person):
-    parents = models.ManyToManyField(Person, related_name='children')
+class Student(User):
+    parents = models.ManyToManyField(User, related_name='children')
+    class Meta:
+        verbose_name = 'Student'
 
 
 class Course(models.Model):
     title = models.CharField(max_length=150)
     description = RichTextField()
     slug = models.CharField(primary_key=True, max_length=50, unique=True)
-    teacher = models.ForeignKey(Person, related_name='taught_courses')
+    teacher = models.ForeignKey(User, related_name='taught_courses')
     students = models.ManyToManyField(Student, blank=True, related_name='enrolled_courses')
     YEAR_CHOICES = map(lambda x: (x,x), range(1970, datetime.now().year + 1))
-    year = models.IntegerField(max_length=4, choices=YEAR_CHOICES, default=datetime.now().year)
+    year = models.IntegerField(choices=YEAR_CHOICES, default=datetime.now().year)
     period = models.IntegerField(default=1, validators=[MinValueValidator(1)])
 
     def __unicode__(self):
@@ -81,7 +78,7 @@ class Grade(models.Model):
         return str(self.get_percentage_grade() * 100) + '%'
 
 class Attachment(models.Model):
-    author = models.ForeignKey(Person, related_name='attachments')
+    author = models.ForeignKey(User, related_name='attachments')
     course = models.ForeignKey(Course, related_name='attachments', null=True, blank=True)
     assignment = models.ForeignKey(Assignment, related_name='attachments', null=True, blank=True)
     file = models.FileField()

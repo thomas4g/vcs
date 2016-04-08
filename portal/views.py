@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import *
 from django.views.generic.base import TemplateView 
-from django.views.generic import ListView, DetailView 
+from django.views.generic import ListView, DetailView, DeleteView
 import django.views.generic.edit as django_views
 from django.forms import ModelForm, DateInput
 from django.forms.widgets import HiddenInput
@@ -22,9 +22,14 @@ class AssignmentForm(ModelForm):
         }
 
 def portal_home(request):
+    context = {}
     # TODO: user type logic
     if request.user.is_staff and request.GET.get('plain', '') != '1':
-        return render(request, "portal/admin_home.html")
+        context['announcements'] = Announcement.objects.all()
+        context['courses'] = Course.objects.all()
+        context['students'] = Student.objects.all()
+        context['users'] = User.objects.all()
+        return render(request, "portal/admin_home.html", context)
     else:
         return render(request, "portal/portal_home.html")
 
@@ -45,6 +50,7 @@ class CourseDetails(DetailView):
 
 class CourseCreate(CreateView):
     model = Course
+    fields = ['title', 'description', 'teacher', 'students', 'year', 'period']
 
 class CourseList(ListView):
     model = Course
@@ -61,6 +67,9 @@ class CourseList(ListView):
         return courses.all()
 
 class CourseUpdate(UpdateView):
+    model = Course
+
+class CourseDelete(DeleteView):
     model = Course
 
 # Assignment
@@ -100,24 +109,27 @@ class AssignmentList(ListView):
 class AssignmentUpdate(UpdateView):
     model = Assignment
 
-# Person
-class PersonDetails(DetailView):
-    model = Person
+# User
+class UserDetails(DetailView):
+    model = User
 
-class PersonCreate(CreateView):
-    model = Person
+class UserDelete(DeleteView):
+    model = User
+
+class UserCreate(CreateView):
+    model = User
     fields = ['username', 'password', 'first_name', 'last_name', 'email']
 
-class PersonList(ListView):
-    model = Person
+class UserList(ListView):
+    model = User
 
-class PersonUpdate(UpdateView):
-    model = Person
+class UserUpdate(UpdateView):
+    model = User
     fields = ['username', 'password', 'first_name', 'last_name', 'email']
 
 # Teacher
 class TeacherDetails(DetailView):
-    model = Person 
+    model = User 
     template_name = "portal/teacher_detail.html"
 
 
@@ -125,7 +137,7 @@ class TeacherDetails(DetailView):
 class StudentDetails(DetailView):
     model = Student
 
-class StudentCreate(PersonCreate):
+class StudentCreate(UserCreate):
     model = Student
     def __init__(self):
         self.fields = self.fields + ['parents']
@@ -133,7 +145,7 @@ class StudentCreate(PersonCreate):
 class StudentList(ListView):
     model = Student
 
-class StudentUpdate(PersonUpdate):
+class StudentUpdate(UserUpdate):
     model = Student
     def __init__(self):
         self.fields = self.fields + ['parents']
@@ -167,5 +179,9 @@ class AnnouncementList(ListView):
         return announcements.all()
 
 class AnnouncementUpdate(UpdateView):
+    model = Announcement
+    fields = ['title', 'body', 'course']
+
+class AnnouncementDelete(DeleteView):
     model = Announcement
     fields = ['title', 'body', 'course']

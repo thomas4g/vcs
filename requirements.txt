@@ -23,3 +23,4 @@ psycopg2==2.6.1
 South==1.0
 django-decorator-include==0.1
 django-render-partial==0.1
+django-ckeditor==5.0.3

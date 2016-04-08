@@ -1,0 +1,31 @@
+{% load custom_tags %}
+<section class='block'>
+    <h1>{{model | title}}s</h1>
+    {% if object_list %}
+        <table class='full borderless'>
+            <tr>
+                {% for field in fields %}
+                <th>{{ field|title }}</th>
+                {% endfor %}
+                <th><span class='fa fa-cogs'></span></th>
+            </tr>
+            {% for object in object_list %}
+            <tr>
+                {% include "portal/"|add:model|add:"_list.html" with object=object %}
+                <td>
+                    <a class='fa fa-pencil' href="{% url model|add:'-edit' object|hash:'slug:id'%}"></a>
+                    |
+                    <a class='fa fa-trash' href="{% url model|add:'-delete' object|hash:'slug:id'%}"></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table> 
+    {% else %}
+        No {{model}}s.
+    {% endif %}
+    {% if user.is_staff %}
+        <footer>
+            <a href="{% url model|add:'-create' %}" class='fa fa-plus-circle'> New {{model}}</a>
+        </footer>
+    {% endif %}
+</section>

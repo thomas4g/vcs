@@ -1,13 +1,23 @@
-{% extends "base.html" %}
+{% extends "portal/base.html" %}
+
+{% block breadcrumbs %}
+{% load custom_tags %}
+{{block.super}}{% breadcrumb 'announcement-list' 'Announcements' %}
+{% endblock %}
 
 {% block content %}
 {# TODO: only show the edit link to teachers/admins #}
 
 <h1>{{ object.title }}</h1>
-by <h2>{{ object.author }}</h2>
-last modified on <time>{{ object.modified }}</time>
+<h2>
+<span class='meta'>by</span>
+{{ object.author.get_full_name }}
+</h2>
+<h3>
+<span class='meta'>last modified on</span> <time>{{ object.modified }}</time>
+</h3>
 
 <div>
-{{ object.body }}
+{{ object.body|safe }}
 </div>
 {% endblock %}

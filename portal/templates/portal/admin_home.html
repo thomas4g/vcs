@@ -1,21 +1,21 @@
-{% extends "base.html" %}
-
+{% extends "portal/base.html" %}
+{% block title %}Admin Portal{% endblock %}
 {% block content %}
 
-<p>Welcome, {{ user }}</p>
-
+<p>Welcome, {{ user.first_name }}!</p>
 <div class='blocks'>
-    {% load render_partial %}
-    {% render_partial 'announcement-list' %}
-
-    {% load render_partial %}
-    {% render_partial 'course-list' %}
-   
-    {% load render_partial %}
-    {% render_partial 'student-list' %}
-
-    {% load render_partial %}
-    {% render_partial 'person-list' %}
+    {% load custom_tags %}
+    {% to_list 'title' 'author' 'modified' as announcement_fields %}
+    {% include "portal/block.html" with model="announcement" object_list=announcements fields=announcement_fields%}
+    
+    {% to_list 'title' 'teacher' as course_fields %}
+    {% include "portal/block.html" with model="course" object_list=courses fields=course_fields%}
+    
+    {% to_list 'name' 'email' as student_fields %}
+    {% include "portal/block.html" with model="student" object_list=students fields=student_fields%}
+    
+    {% to_list 'name' 'email' as user_fields %}
+    {% include "portal/block.html" with model="user" object_list=users fields=user_fields%}
 </div>
 
 {% endblock %}
