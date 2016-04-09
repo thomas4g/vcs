@@ -195,17 +195,6 @@ body {
     background-color: rgba(255, 208, 0, 0.15);
 }
 
-.nav {
-    border-radius:5px 5px 0 0;
-    width:100%;
-    padding:0;
-    display:block;
-    height:40px;
-    font-size:0;
-    text-align:left;
-    position:relative;
-}
-
 nav > ul {
     margin: 0;
     max-width: 100%;
@@ -213,27 +202,28 @@ nav > ul {
 }
 
 nav .child {
-    vertical-align: top;
+    background-color: #ffd000;
     display: block;
     float: left;
-    background-color: #ffd000;
     min-width: 120px;
+    vertical-align: top;
 }
+
 nav .child a {
-    height:40px;
-    padding: 0 5px;
-    padding-top:12px;
+    border-left:1px solid #000066;
     box-sizing: border-box;
-    text-align:center;
+    color: #000066;
+    display:inline-block;
+    height:40px;
     font-weight:bold;
     font-family: Lora;
     font-size:14px;
-    display:inline-block;
-    border-left:1px solid #000066;
+    padding: 0 5px;
+    padding-top:12px;
+    text-align:center;
+    text-decoration:none;
     vertical-align:top;
     width: 100%;
-    color: #000066;
-    text-decoration:none;
 }
 
 nav > .child:first-child a{
@@ -246,40 +236,36 @@ nav .child > a:hover {
     color:white;
 }
 
-nav .parent a {
+nav .parent {
+    border:none;
+    cursor:pointer;
+    position:relative;
+    padding-top:0;
 }
 
-nav .parent {
-    position:relative;
-    cursor:pointer;
-    padding-top:0;
-    border:none;
-}
 nav .parent > a:hover {
     color:black;
     background: none;
 }
+
 nav .parent:hover ul
 {
     display:block;
 }
+
 nav .parent ul
 {
-    position:relative;
-    left:0px;
-    top:0px;
-    padding:0px;
-    margin:0;
-    background-color:yellow;
-    list-style-type:none;
-    display:none;
-    border:1px solid black;
+    border: 1px solid #000000;
     border-top:none;
-    vertical-align:bottom;
+    display:none;
+    margin:0;
+    padding:0px;
 }
+
 nav .parent ul li
 {
     display:block;
+    float: none;
     margin:0;
     padding:0;
 }
