@@ -15,7 +15,7 @@ a:hover {
     text-decoration: none;
 }
 
-p 
+p
 {
     margin-bottom:15px;
 }
@@ -25,16 +25,16 @@ nav,
 section {
     display: block;
 }
-div 
+div
 {
     margin-bottom:10px;
 }
-/* HEADINGS   
+/* HEADINGS
 ----------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
     color: #000;
 }
-.title 
+.title
 {
     font-size:2em;
     text-align:center;
@@ -46,7 +46,7 @@ h1 {
     margin-bottom: 0;
 }
 
-h2 
+h2
 {
     font-size:1.2em;
 }
@@ -92,7 +92,7 @@ table td {
 }
 
 table th {
-    padding: 5px; 
+    padding: 5px;
     text-align: center;
     border: solid 1px #444;
 }
@@ -101,7 +101,7 @@ table td a {
     text-decoration: none;
 }
 
-.table-title 
+.table-title
 {
     background:none;
     color:Blue;
@@ -124,7 +124,6 @@ border-radius:5px;
 .page-header {
     text-align:center;
     background-color:#000066;
-    overflow: auto;
     padding: 0;
 }
 
@@ -151,7 +150,13 @@ border-radius:5px;
     margin: 0;
     text-align: right;
     padding: 0;
-    overflow: auto;
+    height: 40px;
+}
+
+.page-header nav:after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
 .main {
@@ -170,7 +175,7 @@ footer.copyright {
         overflow:auto;
     }
 
-.copyright h1 
+.copyright h1
 {
     font-size:1em;
     margin-top:10px;
@@ -187,13 +192,12 @@ footer.copyright {
 }
 
 body {
-    background-color: rgba(255, 208, 0, 0.15); 
+    background-color: rgba(255, 208, 0, 0.15);
 }
 
 .nav {
     border-radius:5px 5px 0 0;
     width:100%;
-    background-color:yellow;
     padding:0;
     display:block;
     height:40px;
@@ -212,11 +216,14 @@ nav .child {
     vertical-align: top;
     display: block;
     float: left;
+    background-color: #ffd000;
+    min-width: 120px;
 }
 nav .child a {
-    height:28px;
-    padding:0;
+    height:40px;
+    padding: 0 5px;
     padding-top:12px;
+    box-sizing: border-box;
     text-align:center;
     font-weight:bold;
     font-family: Lora;
@@ -224,7 +231,7 @@ nav .child a {
     display:inline-block;
     border-left:1px solid #000066;
     vertical-align:top;
-    width:120px;
+    width: 100%;
     color: #000066;
     text-decoration:none;
 }
@@ -240,12 +247,11 @@ nav .child > a:hover {
 }
 
 nav .parent a {
-    width:119px;
 }
 
 nav .parent {
     position:relative;
-    cursor:pointer; 
+    cursor:pointer;
     padding-top:0;
     border:none;
 }
@@ -270,20 +276,18 @@ nav .parent ul
     border:1px solid black;
     border-top:none;
     vertical-align:bottom;
-    width:119px;
 }
-nav .parent ul li 
+nav .parent ul li
 {
     display:block;
     margin:0;
     padding:0;
 }
-nav .parent ul li a 
+nav .parent ul li a
 {
     text-align:center;
     margin:0;
     padding:10px;
-    width:100px;
     border-radius:0;
     display:block;
     border:none;
@@ -302,7 +306,7 @@ section.block {
     height:100%;
     box-sizing: border-box;
     font-size: .9em;
-    
+
     margin: 25px;
 }
 
@@ -337,7 +341,7 @@ section.block table {
 }
 
 .course header h2 {
-   font-size: 1.3em; 
+   font-size: 1.3em;
    display: inline-block;
 }
 
@@ -358,7 +362,7 @@ section.block table {
 }
 
 .course-announcements ol {
-    padding: 0; 
+    padding: 0;
 }
 
 li.announcement {
