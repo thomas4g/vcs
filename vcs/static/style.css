@@ -214,7 +214,7 @@ nav .child a {
     box-sizing: border-box;
     color: #000066;
     display:inline-block;
-    height:40px;
+    height: 40px;
     font-weight:bold;
     font-family: Lora;
     font-size:14px;
@@ -256,10 +256,11 @@ nav .parent:hover ul
 nav .parent ul
 {
     border: 1px solid #000000;
-    border-top:none;
-    display:none;
-    margin:0;
-    padding:0px;
+    border-top: none;
+    display: none;
+    margin: 0;
+    padding: 0px;
+    position: absolute;
 }
 
 nav .parent ul li
@@ -271,12 +272,12 @@ nav .parent ul li
 }
 nav .parent ul li a
 {
-    text-align:center;
-    margin:0;
-    padding:10px;
-    border-radius:0;
-    display:block;
-    border:none;
+    border: none;
+    display: block;
+    height: auto;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
 }
 
 div.blocks {
