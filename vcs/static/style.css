@@ -269,6 +269,7 @@ nav .parent ul li
     float: none;
     margin:0;
     padding:0;
+    min-width: 119px;
 }
 nav .parent ul li a
 {
