@@ -149,7 +149,7 @@ border-radius:5px;
     clear: both;
     margin: 0;
     padding: 0;
-    height: 40px;
+    min-height: 40px;
 }
 
 .page-header nav:after {
@@ -394,27 +394,41 @@ li.announcement h2, li.announcement h3 {
         float: none;
     }
 
-    .page-header nav ul {
+    nav ul {
         float: none;
         padding: 0;
     }
-    
-    .page-header nav .child {
+
+    nav .child {
         float: none;
         display: inline-block;
-        margin-left: -4px;
+        /*margin-left: -4px;*/
     }
-    
-    .page-header nav .child:first-child a {
-        border-left: none;
+
+    nav .child a {
+        border: none;
     }
+
+    nav .parent:hover {
+        border-left: 1px solid #000066;
+        border-right: 1px solid #000066;
+    }
+
+    nav .parent .child {
+        min-width: 120px;
+    }
+
+    nav .parent ul {
+        margin-left: -1px;
+    }
+
 }
 
 @media (max-width: 650px) {
     .page-header h1 img {
         float: left;
     }
-    
+
     .page-header h1 {
         padding: 5px 0;
     }
