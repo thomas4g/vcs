@@ -385,9 +385,13 @@ li.announcement h2, li.announcement h3 {
 .books-background {
     background-image: url('/media/books2.png');
     background-repeat: no-repeat;
-    background-position: right
+    background-position: right;
+    min-height: 420px;
 }
 
+.books-background p {
+   padding-right: 290px; 
+}
 
 @media (max-width: 1200px) {
     .page {
