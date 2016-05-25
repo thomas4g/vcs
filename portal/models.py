@@ -26,6 +26,10 @@ class Course(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_course_grade(self, student):
+        return sum([grade.get_weighted_points() for entry in self.graded_items.all() for grade in entry.grades.all() if grade.student == student]) / 100.
+
+
 
 class Announcement(models.Model):
     title = models.CharField(max_length=150)
@@ -60,7 +64,7 @@ class Assignment(GradebookEntry):
         return super(Assignment, self).save(*args, **kwargs)
 
 class Grade(models.Model):
-    entry = models.ForeignKey(GradebookEntry)
+    entry = models.ForeignKey(GradebookEntry, related_name='grades')
     student = models.ForeignKey(Student, related_name='grades')
     points = models.IntegerField()
     comments = models.TextField()

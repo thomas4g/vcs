@@ -54,7 +54,9 @@
         <li>
             <h1><a href="{% url 'student-details' student.id %}">
             {{ student.get_full_name }}
-            </a>
+            {% load custom_tags %}
+            {% call object 'get_course_grade' student as g %}
+            </a> <a href="TODO LINK" class='grade'>{{ g|grade}}</a>
             </h1>
         </li>
     {% endfor %}
