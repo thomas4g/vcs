@@ -41,7 +41,7 @@ class GradebookEntry(models.Model):
     course = models.ForeignKey(Course, related_name="graded_items")
     title = models.CharField(max_length=150)
     description = RichTextField()
-    max_points = models.IntegerField()
+    max_points = models.IntegerField(default=100)
     weight = models.FloatField(default=1, validators=[MinValueValidator(0), MaxValueValidator(1)])
     class Meta:
         verbose_name_plural = "Gradebook Entries"
@@ -50,7 +50,7 @@ class GradebookEntry(models.Model):
 class Assignment(GradebookEntry):
     _course = models.ForeignKey(Course, null=True, blank=True, editable=False, related_name='assignments')
     deadline = models.DateTimeField()
-    late_deadline = models.DateTimeField()
+    late_deadline = models.DateTimeField(blank=True)
     proctored = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
